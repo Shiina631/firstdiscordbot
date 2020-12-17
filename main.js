@@ -29,16 +29,9 @@ client.on('message',message =>{
 
     if(command === 'neko'){
         client.commands.get('neko').execute(message, args);
-    } else if (command == 'gem'){
-        client.commands.get('gem').execute(message, args);
-    } else if (command == 'shakeit'){
-        message.channel.send('https://cdn.discordapp.com/attachments/788336053844443146/788349264907730944/tenor.gif');
-    }else if (command == 'speedo'){
-        message.channel.send('https://media.discordapp.net/attachments/436810889329639426/750747521021771889/01-08-01-538226609686315018.gif');
-    }
-
-    
-
+    } else if (command == 'pilot'){
+        client.commands.get('pilot').execute(message, args);
+    } 
 });
 
 client.login(process.env.BOT_TOKEN);
