@@ -57,7 +57,6 @@ client.on('message', async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    
 
     if (!client.commands.has(commandName)) return;
 
@@ -184,6 +183,7 @@ client.on('message', async message => {
     return message.reply(`Could not find tag: ${commandName}`);
   }
 });
+
 
 
 client.login(process.env.BOT_TOKEN);

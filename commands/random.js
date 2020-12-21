@@ -1,11 +1,14 @@
 module.exports ={
-    name: 'kick',
-    description: "this is a kick command!",
+    name: 'random',
+    description: "this is a random command!",
     execute(message, args){
         if (!args.length) {
-            message.reply('Kick who? Kick who? Kick him! Kick her! Kick all pokai!!!');
+            message.reply('Let Neko chan choose it! Let Neko chan choose it!');
         }else{
-            message.channel.send(`${message.author} kick ${args}'s ass.`);
+            var randomIndex = Math.floor(Math.random() * args.length); // gets a random number based on the array's length
+            var randomElement = args[randomIndex]; 
+            
+            message.channel.send(`${randomElement} ba! Neko chan choose this randomly!`);
 
             // if (!message.mentions.users.size) {
             //     message.reply('you need to tag a user in order to kick them!');
