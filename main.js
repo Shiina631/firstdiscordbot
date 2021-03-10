@@ -52,7 +52,7 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-    channel = client.channels.cache.get('818107114890330113');
+    channel = client.channels.get('818107114890330113');
     if(message.author.bot){
 
     }else{
@@ -64,7 +64,7 @@ client.on('messageDelete', message => {
 });
 
 client.on('messageUpdate', message => {
-    channel = client.channels.cache.get('818107114890330113');
+    channel = client.channels.get('818107114890330113');
     if(message.author.bot){
 
     }else{
