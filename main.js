@@ -52,8 +52,7 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-    message.channel.send(`A message by ${message.author} was deleted.`);
-    message.channel.send(`${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+    message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
 });
 
 client.on('messageUpdate', message => {
