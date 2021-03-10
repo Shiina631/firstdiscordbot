@@ -55,9 +55,7 @@ client.on('messageDelete', message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const del = args.slice(1).join(' ');
 
-    if (message.author.id === client.user.id) {
-        message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${del}"`);
-    }
+    message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${del}"`);
 });
 
 client.on('messageUpdate', message => {
