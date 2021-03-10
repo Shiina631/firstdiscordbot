@@ -52,11 +52,10 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-    channel = client.channels.get('818107114890330113');
     if(message.author.bot){
 
     }else{
-        channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${message}"`);
+        client.channels.cache.get('818107114890330113').send(`A message by ${message.author} was deleted. ${message.author} just say "${message}"`);
 
     }
     
@@ -64,11 +63,10 @@ client.on('messageDelete', message => {
 });
 
 client.on('messageUpdate', message => {
-    channel = client.channels.get('818107114890330113');
     if(message.author.bot){
 
     }else{
-        channel.send(`A message by ${message.author} was edited. ${message.author} just say "${message}"`);
+        client.channels.cache.get('818107114890330113').send(`A message by ${message.author} was edited. ${message.author} just say "${message}"`);
     }
 
 });
