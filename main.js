@@ -52,13 +52,16 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-	message.channel.send(`A message by ${message.author} was deleted.`);
+    message.channel.send(`A message by ${message.author} was deleted.`);
     message.channel.send(`${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    message.channel.send(`A message by ${message.author} was edited.`);
-    message.channel.send(`${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+    if (newMessage.content != "") {
+        message.channel.send(`A message by ${message.author} was edited.`);
+        message.channel.send(`${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+
+    }
 });
 
 client.on('message', async message => {
@@ -137,7 +140,7 @@ client.on('message', async message => {
             }
             return message.channel.send(`Something went wrong when adding ${tag.name}.`);
         }
-    // } else if (commandName === 'tag') {
+        // } else if (commandName === 'tag') {
         // const tagName = commandArgs;
 
         // // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
@@ -180,18 +183,18 @@ client.on('message', async message => {
         return message.channel.send(`Tag ${tagName} deleted.`);
     }
 
-  // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-  try{
-    const tag = await Tags.findOne({ where: { name: commandName } });
-    if (tag) {
-      // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-      tag.increment('usage_count');
-      return message.channel.send(tag.get('description'));
-  }
-  }catch(e){
-    console.log(e);
-    return message.reply(`Could not find tag: ${commandName}`);
-  }
+    // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+    try {
+        const tag = await Tags.findOne({ where: { name: commandName } });
+        if (tag) {
+            // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+            tag.increment('usage_count');
+            return message.channel.send(tag.get('description'));
+        }
+    } catch (e) {
+        console.log(e);
+        return message.reply(`Could not find tag: ${commandName}`);
+    }
 });
 
 
