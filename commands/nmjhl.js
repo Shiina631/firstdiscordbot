@@ -1,5 +1,5 @@
 module.exports ={
-    name: 'njhl',
+    name: 'nmjhl',
     description: "this is a njhl command!",
     execute(message, args){
         message.react('🇳')
