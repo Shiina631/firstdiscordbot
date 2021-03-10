@@ -53,13 +53,13 @@ client.once('ready', () => {
 
 client.on('messageDelete', message => {
     if (message.author.id === client.user.id) {
-        message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+        message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${message.content}"`);
     }
 });
 
 client.on('messageUpdate', message => {
     if (message.author.id === client.user.id) {
-        message.channel.send(`A message by ${message.author} was edited. ${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+        message.channel.send(`A message by ${message.author} was edited. ${message.author} just say "${message.content}"`);
     }
 });
 
