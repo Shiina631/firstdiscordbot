@@ -51,6 +51,10 @@ client.once('ready', () => {
     Tags.sync();
 });
 
+client.on('messageDelete', message => {
+	message.channel.send(`A message by ${message.author.tag} was deleted, but we don't know by who yet.`);
+});
+
 client.on('message', async message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
