@@ -52,14 +52,12 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const del = args.slice(1).join(' ');
+    message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${message.content.startsWith()}"`);
 
-    message.channel.send(`A message by ${message.author} was deleted. ${message.author} just say "${del}"`);
 });
 
 client.on('messageUpdate', message => {
-    message.channel.send(`A message by ${message.author} was edited. ${message.author} just say "${message.content.slice(prefix.length).trim().split(/ +/)}"`);
+    message.channel.send(`A message by ${message.author} was edited. ${message.author} just say "${message.content.startsWith()}"`);
 
 });
 
