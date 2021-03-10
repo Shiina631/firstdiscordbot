@@ -64,7 +64,7 @@ client.on('messageDelete', message => {
 });
 
 client.on('messageUpdate', message => {
-
+    channel = client.channels.cache.get('818107114890330113');
     if(message.author.bot){
 
     }else{
