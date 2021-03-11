@@ -51,39 +51,78 @@ client.once('ready', () => {
     Tags.sync();
 });
 
-client.on('messageDelete', message => {
-    if (message.author.bot) {
+//hentai summon machine
+client.on('message', async message => {
+    const amount = parseInt(message);
+    if (message.author.bot || isNaN(amount) || amount < 100000 || amount > 999999) return;
+    //https://nhentai.net/g/139517
+    //629163839149309972
+    message.channel.send(`https://nhentai.net/g/${amount} Will delete in 30seconds, Fast Fast bookmark it.`)
+        .then(msg => {
+            msg.delete({ timeout: 30000 /*30sc*/ });
+        })
+        .catch();
 
-    } else {
-
-        const exampleEmbed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle('Delete')
-            .setAuthor(message.author, client.author.displayAvatarURL())
-            .setDescription('This pokai delete a message.')
-            .setThumbnail(client.user.displayAvatarURL())
-            .addFields(
-                { name: 'Deleted message', value: message }
-            )
-            .setTimestamp();
-
-        client.channels.cache.get('818107114890330113').send(exampleEmbed);
-
-
-        //client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
-
-    }
-
+    //setTimeout(() => message.delete(), 2000);
+    //message.channel.send(`https://nhentai.net/g/${amount}`);
 
 });
 
-client.on('messageUpdate', (oldMessage, newMessage) => {
-    if (message.author.bot) {
-
-    } else {
-        client.channels.cache.get('818107114890330113').send(`Edit. ${message.author.tag}: "${oldMessage}" changed to "${newMessage}"`);
+client.on('message', async message => {
+    var user = message.author.id;
+    if (user === "246553923157098496") {
+        message.channel.send(`Diam la, ${message.author.username}`)
+            .then(msg => {
+                msg.delete({ timeout: 500 /*0.5sc*/ });
+            })
+            .catch();
     }
 
+});
+
+// my own server id: 594154715449655296
+// group kaixin-channel id: 818107114890330113
+// my own test server channel id: 788336053844443146
+// group spam channel id: 629163839149309972
+
+client.on('messageDelete', message => {
+    var server = message.guild.id;
+    var user = message.author.id;
+    if (server === "594154715449655296" || user === "367634753161003008" || message.author.bot) return;
+    const exampleEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle('Delete')
+        .setAuthor(message.author.username, client.user.displayAvatarURL())
+        .setDescription(`This pokai delete a message in <#${message.channel.id}>.`)
+        .setThumbnail(message.author.avatarURL())
+        .addFields(
+            { name: 'Deleted message', value: message }
+        )
+        .setTimestamp();
+
+    client.channels.cache.get('818107114890330113').send(exampleEmbed);
+
+    //client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
+});
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+    var server = oldMessage.guild.id;
+    var user = oldMessage.author.id;
+    if (server === "594154715449655296" || user === "367634753161003008" || oldMessage.author.bot) return;
+    const exampleEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle(oldMessage.author.id)
+        .setAuthor(oldMessage.author.username, client.user.displayAvatarURL())
+        .setDescription(`This pokai edit a message in <#${oldMessage.channel.id}>.`)
+        .setThumbnail(oldMessage.author.avatarURL())
+        .addFields(
+            { name: 'Original message', value: oldMessage }
+        )
+        .addField('After edit', newMessage, true)
+        .setTimestamp();
+
+    client.channels.cache.get('818107114890330113').send(exampleEmbed);
+    //client.channels.cache.get('818107114890330113').send(`Edit. ${oldMessage.author.tag}: "${oldMessage}" changed to "${newMessage}"`);
 });
 
 client.on('message', async message => {
@@ -155,7 +194,6 @@ client.on('message', async message => {
             )
             .addField('cincai la', 'Hi', true)
             .setTimestamp();
-
         message.channel.send(exampleEmbed);
     } else if (commandName === 'add') {
         const splitArgs = commandArgs.split(' ');
