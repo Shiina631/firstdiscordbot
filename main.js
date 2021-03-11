@@ -147,7 +147,7 @@ client.on('message', async message => {
             .setTimestamp()
             .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
 
-        channel.send(exampleEmbed);
+        message.channel.send(exampleEmbed);
     } else if (commandName === 'add') {
         const splitArgs = commandArgs.split(' ');
         const tagName = splitArgs.shift();
