@@ -55,7 +55,22 @@ client.on('messageDelete', message => {
     if (message.author.bot) {
 
     } else {
-        client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
+
+        const exampleEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Delete')
+            .setAuthor(message.author, client.author.displayAvatarURL())
+            .setDescription('This pokai delete a message.')
+            .setThumbnail(client.user.displayAvatarURL())
+            .addFields(
+                { name: 'Deleted message', value: message }
+            )
+            .setTimestamp();
+
+        client.channels.cache.get('818107114890330113').send(exampleEmbed);
+
+
+        //client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
 
     }
 
