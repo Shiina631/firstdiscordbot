@@ -131,16 +131,14 @@ client.on('message', async message => {
     } else if (commandName === 'help') {
         const exampleEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
-            .setTitle('Some title')
-            .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+            .setTitle('Help')
+            .setAuthor('Author', 'https://cdn.discordapp.com/attachments/788336053844443146/819405567994757161/66bbe5953e315781ce4de1b49510e08f.png', 'https://discord.js.org')
             .setDescription('Some description here')
-            .setThumbnail('https://i.imgur.com/wSTFkRM.png')
+            .setThumbnail('https://cdn.discordapp.com/attachments/788336053844443146/819405567994757161/66bbe5953e315781ce4de1b49510e08f.png')
             .addFields(
-                { name: 'Regular field title', value: 'Some value here' }
+                { name: 'Nothing to write', value: 'haiya' }
             )
-            .addField('Inline field title', 'Some value here', true)
-            .setTimestamp()
-            .setFooter('Some footer text here');
+            .setTimestamp();
 
         message.channel.send(exampleEmbed);
     } else if (commandName === 'add') {
