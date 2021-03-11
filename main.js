@@ -132,9 +132,9 @@ client.on('message', async message => {
         const exampleEmbed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Help')
-            .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+            .setAuthor('Some name', 'https://i.imgur.com/XsQdB9k.png', 'https://discord.js.org')
             .setDescription('Some description here')
-            .setThumbnail('https://i.imgur.com/wSTFkRM.png')
+            .setThumbnail('https://i.imgur.com/XsQdB9k.png')
             .addFields(
                 { name: 'Nothing to write', value: 'haiya' }
             )
