@@ -52,20 +52,20 @@ client.once('ready', () => {
 });
 
 client.on('messageDelete', message => {
-    if(message.author.bot){
+    if (message.author.bot) {
 
-    }else{
+    } else {
         client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
 
     }
-    
+
 
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
-    if(message.author.bot){
+    if (message.author.bot) {
 
-    }else{
+    } else {
         client.channels.cache.get('818107114890330113').send(`Edit. ${message.author.tag}: "${oldMessage}" changed to "${newMessage}"`);
     }
 
@@ -128,6 +128,26 @@ client.on('message', async message => {
     if (commandName === 'cat') {
         const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
         message.channel.send(file);
+    } else if (commandName === 'help') {
+        const exampleEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Some title')
+            .setURL('https://discord.js.org/')
+            .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+            .setDescription('Some description here')
+            .setThumbnail('https://i.imgur.com/wSTFkRM.png')
+            .addFields(
+                { name: 'Regular field title', value: 'Some value here' },
+                { name: '\u200B', value: '\u200B' },
+                { name: 'Inline field title', value: 'Some value here', inline: true },
+                { name: 'Inline field title', value: 'Some value here', inline: true },
+            )
+            .addField('Inline field title', 'Some value here', true)
+            .setImage('https://i.imgur.com/wSTFkRM.png')
+            .setTimestamp()
+            .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+
+        channel.send(exampleEmbed);
     } else if (commandName === 'add') {
         const splitArgs = commandArgs.split(' ');
         const tagName = splitArgs.shift();
