@@ -68,17 +68,17 @@ client.on('message', async message => {
 
 });
 
-client.on('message', async message => {
+/*client.on('message', async message => {
     var user = message.author.id;
     if (user === "246553923157098496") {
         message.channel.send(`Diam la, ${message.author.username}`)
             .then(msg => {
-                msg.delete({ timeout: 500 /*0.5sc*/ });
+                msg.delete({ timeout: 500  });
             })
             .catch();
     }
 
-});
+});*/
 
 // my own server id: 594154715449655296
 // group kaixin-channel id: 818107114890330113
