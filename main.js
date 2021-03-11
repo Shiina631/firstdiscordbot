@@ -55,18 +55,18 @@ client.on('messageDelete', message => {
     if(message.author.bot){
 
     }else{
-        client.channels.cache.get('818107114890330113').send(`A message by ${message.author.tag} was deleted. ${message.author.tag} just say "${message}"`);
+        client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
 
     }
     
 
 });
 
-client.on('messageUpdate', message => {
+client.on('messageUpdate', (oldMessage, newMessage) => {
     if(message.author.bot){
 
     }else{
-        client.channels.cache.get('818107114890330113').send(`A message by ${message.author.tag} was edited. ${message.author.tag} just say "${message}"`);
+        client.channels.cache.get('818107114890330113').send(`Edit. ${message.author.tag}: "${oldMessage}" changed to "${newMessage}"`);
     }
 
 });
