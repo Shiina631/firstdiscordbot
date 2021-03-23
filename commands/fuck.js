@@ -6,7 +6,7 @@ module.exports = {
             message.reply('Fuck who? Fuck who?');
         } else {
             const text = args.join(' ');
-            message.channel.send(`${message.author} is horny now. Want to fuck ${text}'s ass.`);
+            message.channel.send(`${message.author} is horny right now. Want to fuck ${text}'s ass.`);
 
             // if (!message.mentions.users.size) {
             //     message.reply('you need to tag a user in order to kick them!');
