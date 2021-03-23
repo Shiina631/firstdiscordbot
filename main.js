@@ -31,7 +31,6 @@ const Tags = sequelize.define('tags', {
     },
 });
 
-
 // const cooldowns = new Discord.Collection();
 client.commands = new Discord.Collection();
 

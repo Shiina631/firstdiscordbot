@@ -1,11 +1,12 @@
-module.exports ={
+module.exports = {
     name: 'kick',
     description: "this is a kick command!",
-    execute(message, args){
+    execute(message, args) {
         if (!args.length) {
             message.reply('Kick who? Kick who? Kick him! Kick her! Kick all pokai!!!');
-        }else{
-            message.channel.send(`${message.author} kick ${args}'s ass.`);
+        } else {
+            const text = args.join(' ');
+            message.channel.send(`${message.author} kick ${text}'s ass.`);
 
             // if (!message.mentions.users.size) {
             //     message.reply('you need to tag a user in order to kick them!');
@@ -15,7 +16,7 @@ module.exports ={
             // }
 
         }
-        
-        
+
+
     }
 }
