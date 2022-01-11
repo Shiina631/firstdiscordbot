@@ -87,7 +87,8 @@ client.on('message', async message => {
 client.on('messageDelete', message => {
     var server = message.guild.id;
     var user = message.author.id;
-    if (server === "594154715449655296" || user === "367634753161003008" || message.author.bot) return;
+    if (server === "594154715449655296" || message.author.bot || user === "367634753161003008" || message.attachments.size) return;
+    //
     const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle('Delete')
@@ -98,9 +99,23 @@ client.on('messageDelete', message => {
             { name: 'Deleted message', value: message }
         )
         .setTimestamp();
-
     client.channels.cache.get('818107114890330113').send(exampleEmbed);
 
+    // testtt
+    // if (message.author.bot || message.attachments.size) return;
+    // const embedtwo = new Discord.MessageEmbed()
+    //     .setColor('#0099ff')
+    //     .setTitle('Delete')
+    //     .setAuthor(message.author.username, client.user.displayAvatarURL())
+    //     .setDescription(`This pokai delete a message in <#${message.channel.id}>.`)
+    //     .setThumbnail(message.author.avatarURL())
+    //     .addFields(
+    //         { name: 'Deleted message', value: message }
+    //     )
+    //     .setTimestamp();
+    //     client.channels.cache.get('930413685070000148').send(embedtwo);
+    //     if (message.author.bot) return;
+    // if (message.attachments.size) message.channel.send({files: [message.attachments.first()]})
     //client.channels.cache.get('818107114890330113').send(`Delete. ${message.author.tag}: "${message}"`);
 });
 
@@ -126,6 +141,11 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on('message', async message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
+    
+    if (message.attachments.size){
+        client.channels.cache.get('930413685070000148').send({files: [message.attachments.first()]})
+        client.channels.cache.get('930413685070000148').send(`Send by ${message.author.username}, id: ${message.url}`)
+    }
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -140,6 +160,7 @@ client.on('message', async message => {
         return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
     }
 
+    
     // if (!cooldowns.has(command.name)) {
     //     cooldowns.set(command.name, new Discord.Collection());
     // }
@@ -168,107 +189,109 @@ client.on('message', async message => {
     }
 });
 
-client.on('message', async message => {
-    const prefix = '+';
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+// remove function tag
+// client.on('message', async message => {
+//     const prefix = '+';
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const commandName = args.shift().toLowerCase();
+//     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const commandArgs = args.join(' ');
+//     const args = message.content.slice(prefix.length).trim().split(/ +/);
+//     const commandName = args.shift().toLowerCase();
 
-    if (commandName === 'cat') {
-        const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
-        message.channel.send(file);
-    } else if (commandName === 'help') {
-        const exampleEmbed = new Discord.MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle('Help')
-            .setAuthor('Some name', 'https://i.imgur.com/XsQdB9k.png', 'https://discord.js.org')
-            .setDescription('Some description here')
-            .setThumbnail('https://i.imgur.com/XsQdB9k.png')
-            .addFields(
-                { name: 'Nothing to write', value: 'haiya' }
-            )
-            .addField('cincai la', 'Hi', true)
-            .setTimestamp();
-        message.channel.send(exampleEmbed);
-    } else if (commandName === 'add') {
-        const splitArgs = commandArgs.split(' ');
-        const tagName = splitArgs.shift();
-        const tagDescription = splitArgs.join(' ');
+//     const commandArgs = args.join(' ');
 
-        try {
-            // equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
-            const tag = await Tags.create({
-                name: tagName,
-                description: tagDescription,
-                username: message.author.username,
-            });
-            return message.reply(` ${tag.name} successfully added.`);
-        } catch (e) {
-            if (e.name === 'SequelizeUniqueConstraintError') {
-                return message.channel.send(` ${tag.name} already exists.`);
-            }
-            return message.channel.send(`Something went wrong when adding ${tag.name}.`);
-        }
-        // } else if (commandName === 'tag') {
-        // const tagName = commandArgs;
+//     if (commandName === 'cat') {
+//         const { file } = await fetch('https://aws.random.cat/meow').then(response => response.json());
+//         message.channel.send(file);
+//     } else if (commandName === 'help') {
+//         const exampleEmbed = new Discord.MessageEmbed()
+//             .setColor('#0099ff')
+//             .setTitle('Help')
+//             .setAuthor('Some name', 'https://i.imgur.com/XsQdB9k.png', 'https://discord.js.org')
+//             .setDescription('Some description here')
+//             .setThumbnail('https://i.imgur.com/XsQdB9k.png')
+//             .addFields(
+//                 { name: 'Nothing to write', value: 'haiya' }
+//             )
+//             .addField('cincai la', 'Hi', true)
+//             .setTimestamp();
+//         message.channel.send(exampleEmbed);
+//     } else if (commandName === 'add') {
+//         const splitArgs = commandArgs.split(' ');
+//         const tagName = splitArgs.shift();
+//         const tagDescription = splitArgs.join(' ');
 
-        // // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-        // const tag = await Tags.findOne({ where: { name: tagName } });
-        // if (tag) {
-        //     // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-        //     tag.increment('usage_count');
-        //     return message.channel.send(tag.get('description'));
-        // }
-        // return message.reply(`Could not find tag: ${tagName}`);
-    } else if (commandName === 'edit') {
-        const splitArgs = commandArgs.split(' ');
-        const tagName = splitArgs.shift();
-        const tagDescription = splitArgs.join(' ');
-        // equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
-        const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
-        if (affectedRows > 0) {
-            return message.channel.send(`Tag ${tagName} was edited.`);
-        }
-        return message.channel.send(`Tag ${tagName} not exist.`);
-    } else if (commandName === 'info') {
-        const tagName = commandArgs;
-        // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-        const tag = await Tags.findOne({ where: { name: tagName } });
-        if (tag) {
-            return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
-        }
-        return message.channel.send(`Tag ${tagName} not exist.`);
-    } else if (commandName === 'showtags') {
-        // equivalent to: SELECT name FROM tags;
-        const tagList = await Tags.findAll({ attributes: ['name'] });
-        const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
-        return message.channel.send(`List of tags: ${tagString}`);
-    } else if (commandName === 'delete') {
-        // equivalent to: DELETE from tags WHERE name = ?;
-        const tagName = commandArgs;
-        const rowCount = await Tags.destroy({ where: { name: tagName } });
-        if (!rowCount) return message.channel.send(`Tag ${tagName} not exist.`);
+//         try {
+//             // equivalent to: INSERT INTO tags (name, descrption, username) values (?, ?, ?);
+//             const tag = await Tags.create({
+//                 name: tagName,
+//                 description: tagDescription,
+//                 username: message.author.username,
+//             });
+//             return message.reply(` ${tag.name} successfully added.`);
+//         } catch (e) {
+//             if (e.name === 'SequelizeUniqueConstraintError') {
+//                 return message.channel.send(` ${tag.name} already exists.`);
+//             }
+//             return message.channel.send(`Something went wrong when adding ${tag.name}.`);
+//         }
+//         // } else if (commandName === 'tag') {
+//         // const tagName = commandArgs;
 
-        return message.channel.send(`Tag ${tagName} deleted.`);
-    }
+//         // // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+//         // const tag = await Tags.findOne({ where: { name: tagName } });
+//         // if (tag) {
+//         //     // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+//         //     tag.increment('usage_count');
+//         //     return message.channel.send(tag.get('description'));
+//         // }
+//         // return message.reply(`Could not find tag: ${tagName}`);
+//     } else if (commandName === 'edit') {
+//         const splitArgs = commandArgs.split(' ');
+//         const tagName = splitArgs.shift();
+//         const tagDescription = splitArgs.join(' ');
+//         // equivalent to: UPDATE tags (descrption) values (?) WHERE name = ?;
+//         const affectedRows = await Tags.update({ description: tagDescription }, { where: { name: tagName } });
+//         if (affectedRows > 0) {
+//             return message.channel.send(`Tag ${tagName} was edited.`);
+//         }
+//         return message.channel.send(`Tag ${tagName} not exist.`);
+//     } else if (commandName === 'info') {
+//         const tagName = commandArgs;
+//         // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+//         const tag = await Tags.findOne({ where: { name: tagName } });
+//         if (tag) {
+//             return message.channel.send(`${tagName} was created by ${tag.username} at ${tag.createdAt} and has been used ${tag.usage_count} times.`);
+//         }
+//         return message.channel.send(`Tag ${tagName} not exist.`);
+//     } else if (commandName === 'showtags') {
+//         // equivalent to: SELECT name FROM tags;
+//         const tagList = await Tags.findAll({ attributes: ['name'] });
+//         const tagString = tagList.map(t => t.name).join(', ') || 'No tags set.';
+//         return message.channel.send(`List of tags: ${tagString}`);
+//     } else if (commandName === 'delete') {
+//         // equivalent to: DELETE from tags WHERE name = ?;
+//         const tagName = commandArgs;
+//         const rowCount = await Tags.destroy({ where: { name: tagName } });
+//         if (!rowCount) return message.channel.send(`Tag ${tagName} not exist.`);
 
-    // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
-    try {
-        const tag = await Tags.findOne({ where: { name: commandName } });
-        if (tag) {
-            // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
-            tag.increment('usage_count');
-            return message.channel.send(tag.get('description'));
-        }
-    } catch (e) {
-        console.log(e);
-        return message.reply(`Could not find tag: ${commandName}`);
-    }
-});
+//         return message.channel.send(`Tag ${tagName} deleted.`);
+//     }
+
+//     // equivalent to: SELECT * FROM tags WHERE name = 'tagName' LIMIT 1;
+//     try {
+//         const tag = await Tags.findOne({ where: { name: commandName } });
+//         if (tag) {
+//             // equivalent to: UPDATE tags SET usage_count = usage_count + 1 WHERE name = 'tagName';
+//             tag.increment('usage_count');
+//             return message.channel.send(tag.get('description'));
+//         }
+//     } catch (e) {
+//         console.log(e);
+//         return message.reply(`Could not find tag: ${commandName}`);
+//     }
+// });
 
 
 

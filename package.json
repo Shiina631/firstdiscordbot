@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node main.js"
   },
-  "author": "",
+  "author": "wx",
   "license": "ISC",
   "dependencies": {
     "discord-youtube-api": "^0.1.0",
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.3",
     "discord.js-collector": "^1.8.3",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
@@ -18,5 +18,16 @@
     "sequelize": "^6.3.5",
     "simple-youtube-api": "^5.2.1",
     "sqlite3": "^5.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shiina631/firstdiscordbot.git"
+  },
+  "keywords": [
+    "discordbot"
+  ],
+  "bugs": {
+    "url": "https://github.com/Shiina631/firstdiscordbot/issues"
+  },
+  "homepage": "https://github.com/Shiina631/firstdiscordbot#readme"
 }
