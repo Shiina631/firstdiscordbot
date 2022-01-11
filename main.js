@@ -160,7 +160,6 @@ client.on('message', async message => {
         return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
     }
 
-    
     // if (!cooldowns.has(command.name)) {
     //     cooldowns.set(command.name, new Discord.Collection());
     // }
@@ -292,7 +291,5 @@ client.on('message', async message => {
 //         return message.reply(`Could not find tag: ${commandName}`);
 //     }
 // });
-
-
 
 client.login(process.env.BOT_TOKEN);
