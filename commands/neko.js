@@ -5,7 +5,7 @@ module.exports ={
         if (!args.length) {
             message.channel.send('Meow');        
         } else if(args[0] === 'neko'){
-            message.channel.send('Meow Meow Meow');
+            message.channel.send('Meow Meow?');
         } else if (args[0] == 'emo'){
             message.channel.send('https://tenor.com/view/kitty-cat-depress-my-life-sad-gif-13253623');
         } else if (args[0] == 'angry'){
