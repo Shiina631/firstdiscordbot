@@ -88,7 +88,7 @@ client.on('messageDelete', message => {
     var server = message.guild.id;
     var user = message.author.id;
     var channel = message.channel.id;
-    if (server === "594154715449655296" || channel === "629163839149309972" || message.author.bot || message.attachments.size) return;
+    if (server === "594154715449655296" || channel === "620487042203385866" || message.author.bot || message.attachments.size) return;
     //
     const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
@@ -124,7 +124,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
     var server = oldMessage.guild.id;
     var user = oldMessage.author.id;
     var channel = oldMessage.channel.id;
-    if (server === "594154715449655296" || channel === "629163839149309972" || oldMessage.author.bot || oldMessage.content.startsWith('http')) return;
+    if (server === "594154715449655296" || channel === "620487042203385866" || oldMessage.author.bot || oldMessage.content.startsWith('http')) return;
     const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
         .setTitle(oldMessage.author.id)
