@@ -87,7 +87,8 @@ client.on('message', async message => {
 client.on('messageDelete', message => {
     var server = message.guild.id;
     var user = message.author.id;
-    if (server === "594154715449655296" || message.author.bot || user === "367634753161003008" || message.attachments.size) return;
+    var channel = message.guild.channels.cache.get(channelid);
+    if (server === "594154715449655296" || channel === "629163839149309972" || message.author.bot || user === "367634753161003008" || message.attachments.size) return;
     //
     const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
